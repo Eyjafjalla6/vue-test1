@@ -63,18 +63,18 @@
 import MetricCard from '@/components/MetricCard.vue'
 
 export default {
-  components: { MetricCard },
+  components: { MetricCard },//组件注册
   data() {
     return {
-      ws: null,
+      ws: null,// WebSocket 连接对象，初始为空
       isConnected: false,
       errorMessage: '',
       totalMemory: 16, // 假设总内存16GB
       metrics: {
-        networkSpeed: 0,
-        cpuUsage: 0,
-        memoryUsage: 0,
-        currentTime: '--:--:--'
+        networkSpeed: 0,//下载速度Kbps
+        cpuUsage: 0,// CPU 使用率，单位 %
+        memoryUsage: 0, // 内存使用量，单位 GB
+        currentTime: '--:--:--'//当前时间
       },
       prevMetrics: {} // 用于计算趋势
     }
@@ -89,7 +89,7 @@ export default {
     networkTrend() {
       if (!this.prevMetrics.networkSpeed) return null
       return this.metrics.networkSpeed > this.prevMetrics.networkSpeed 
-        ? 'up' : 'down' //趋势
+        ? 'up' : 'down' //趋势,绿色上升，蓝色下降
     }
   },
   methods: {

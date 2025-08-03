@@ -1,4 +1,3 @@
-
 <template>
   <div class="home-container">
     <el-container>
@@ -61,49 +60,15 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import defaultAvatar from '@/assets/logo.svg'
-
+//Vue2语法
 export default {
   data() {
     return {
       defaultAvatar,
-      showFloatWindow: true,
-      isMinimized: false,
-      // 悬浮窗位置和尺寸
-      floatWindow: {
-        x: window.innerWidth - 400,
-        y: 100,
-        width: 350,
-        height: 450,
-        minWidth: 200,
-        minHeight: 200,
-        maxWidth: window.innerWidth * 0.8,
-        maxHeight: window.innerHeight * 0.8
-      },
-      // 拖动状态
-      isDragging: false,
-      dragOffset: { x: 0, y: 0 },
-      // 缩放状态
-      isResizing: false,
-      resizeStart: { x: 0, y: 0, width: 0, height: 0 }
     }
   },
   computed: {
     ...mapState(['userInfo']),
-    iframeStyle() {
-      return {
-        width: '100%',
-        height: this.isMinimized ? '0' : `calc(100% - ${this.floatWindow.headerHeight}px)`,
-        display: this.isMinimized ? 'none' : 'block'
-      }
-    }
-  },
-  mounted() {
-    document.addEventListener('mousemove', this.handleMouseMove)
-    document.addEventListener('mouseup', this.stopDragResize)
-  },
-  beforeDestroy() {
-    document.removeEventListener('mousemove', this.handleMouseMove)
-    document.removeEventListener('mouseup', this.stopDragResize)
   },
   methods: {
     ...mapMutations(['CLEAR_STATE']),
@@ -167,54 +132,6 @@ export default {
 .main-content {
   padding: 20px !important;
   background-color: #f5f7fa;
-}
-
-.float-window {
-  position: fixed;
-  left: v-bind('floatWindow.x + "px"');
-  top: v-bind('floatWindow.y + "px"');
-  width: v-bind('floatWindow.width + "px"');
-  height: v-bind('floatWindow.height + "px"');
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  z-index: 999;
-  overflow: hidden;
-  cursor: move;
-  user-select: none;
-}
-
-.float-header {
-  height: 40px;
-  line-height: 40px;
-  padding: 0 15px;
-  background: #409eff;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.window-controls i {
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.float-iframe {
-  width: 100%;
-  height: calc(100% - 40px);
-  border: none;
-}
-
-.resize-handle {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 15px;
-  height: 15px;
-  background: #409eff;
-  cursor: nwse-resize;
-  z-index: 1000;
 }
 
 .router-container {
